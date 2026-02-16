@@ -1,18 +1,16 @@
 import { useState } from "react";
+import Create from "./components/Create";
+import Read from "./components/Read";
 
 const App = () => {
-
-  const [name, setName] = useState("Swapnil");
-  const changeHandler = function () {
-    return setName("test");
-  };
-
+  const [todos, settodos] = useState([]);
   return (
     <>
-      <h1>{name}</h1>
-      <button onClick={changeHandler}>Change Name</button>
+      <Create todos={todos} settodos={settodos} />
+      <hr />
+      <Read todos={todos} settodos={settodos} />
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;

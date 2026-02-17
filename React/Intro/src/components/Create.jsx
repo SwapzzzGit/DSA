@@ -1,24 +1,22 @@
-import { nanoid } from "nanoid";
 import { useState } from "react";
-
+import { nanoid } from "nanoid";
 const Create = (props) => {
+  const [title, settitle] = useState("");
   const todos = props.todos;
   const settodos = props.settodos;
-  const [title, settitle] = useState("");
   const submitHandler = (e) => {
     e.preventDefault();
-    const newTodo = {
-      id: nanoid(),
-      title: title,
-      isCompleted: false,
-    };
+    const newTodo = { id: nanoid(), title: title, isCompleted: false };
     settodos([...todos, newTodo]);
     settitle("");
+    console.log(todos);
   };
 
   return (
-    <>
-      <h1>Create Tasks</h1>
+    <div className="border-2 w-[60%] p-2 mx-auto">
+      <h1 className="text-6xl font-thin">
+        Set <span className="text-teal-500">Remainders</span> for Tasks
+      </h1>
       <form onSubmit={submitHandler}>
         <input
           value={title}
@@ -26,9 +24,10 @@ const Create = (props) => {
           type="text"
           placeholder="Title"
         />
-        <button>Create TODOs</button>
+        <br />
+        <button>Create Todo</button>
       </form>
-    </>
+    </div>
   );
 };
 

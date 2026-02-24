@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { nanoid } from "nanoid";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { recipecontext } from "../context/RecipeContext";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -12,11 +12,17 @@ const CreateRecipes = () => {
 
   const submitHandler = (formData) => {
     formData.id = nanoid();
-    setdata([...data, formData]);
+    //setdata([...data, formData]);
+    const newData = [...data, formData];
+    localStorage.setItem("recipes", JSON.stringify(newData));
+    setdata(newData);
     toast.success("New Recipe Created!!!");
     reset();
     navigate("/recipe");
   };
+  useEffect(() => {
+    localStorage.getItem("recipies");
+  }, []);
   return (
     <form
       className="flex flex-col w-fit border-b-2 font-2xl"

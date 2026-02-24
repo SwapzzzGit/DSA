@@ -9,7 +9,10 @@ const Recipe = () => {
     <RecipeCard key={recipe.id} recipe={recipe} />
   ));
 
-  return <div className="flex flex-wrap">{renderrecipe}</div>;
+  return (
+    <div className="flex flex-wrap">
+      {data.length > 0 ? renderrecipe : <h2>No Recipe Found...</h2>}
+    </div>
+  );
 };
-
 export default Recipe;

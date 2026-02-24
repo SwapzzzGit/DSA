@@ -12,26 +12,28 @@ const SingleRecipe = () => {
   const recipe = data.find((recipe) => params.id == recipe.id);
   const { register, handleSubmit } = useForm({
     defaultValues: {
-      title: recipe.title,
-      image: recipe.image,
-      chef: recipe.chef,
-      desc: recipe.desc,
-      ingr: recipe.ingr,
-      inst: recipe.inst,
-      catagory: recipe.catagory,
+      title: recipe?.title,
+      image: recipe?.image,
+      chef: recipe?.chef,
+      desc: recipe?.desc,
+      ingr: recipe?.ingr,
+      inst: recipe?.inst,
+      catagory: recipe?.catagory,
     },
   });
   const navigate = useNavigate();
 
-  const submitHandler = (recipe) => {
+  const UpdateHandler = (recipe) => {
     const index = data.findIndex((recipe) => recipe.id == params.id);
     const copydata = [...data];
     copydata[index] = { ...copydata[index], ...recipe };
+    localStorage.setItem("recipes", JSON.stringify(copydata));
     setdata(copydata);
     toast.success("Recipe Updated!!!");
   };
   const deleteHandler = () => {
     const filteredData = data.filter((e) => e.id != params.id);
+    localStorage.setItem("recipe", JSON.stringify(filteredData));
     setdata(filteredData);
     toast.success("Recipe Deleted Successfully!!!");
     navigate("/recipe");
@@ -50,7 +52,7 @@ const SingleRecipe = () => {
       <div className="right w-1/2 p-2">
         <form
           className="flex flex-col w-fit  font-2xl"
-          onSubmit={handleSubmit(submitHandler)}
+          onSubmit={handleSubmit(UpdateHandler)}
         >
           <input
             className="mt-5 block border-b-2"
